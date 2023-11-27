@@ -76,7 +76,7 @@ export interface MinifiedCategoryData {
  * Represents a question.
  */
 export interface Question<
-  QuestionType extends unknown | QuestionTypes = unknown
+  QuestionType extends unknown | QuestionTypes = unknown,
 > {
   /**
    * The category this question belongs to.
@@ -111,8 +111,8 @@ export interface Question<
   incorrectAnswers: QuestionType extends unknown
     ? IncorrectAnswers | BooleanString
     : QuestionType extends "multiple"
-    ? IncorrectAnswers
-    : BooleanString;
+      ? IncorrectAnswers
+      : BooleanString;
 
   /**
    * All choice options for this question.
@@ -120,8 +120,8 @@ export interface Question<
   allAnswers: QuestionType extends unknown
     ? AllAnswers<QuestionTypes.Multiple> | AllAnswers<QuestionTypes.Boolean>
     : QuestionType extends "multiple"
-    ? AllAnswers<QuestionTypes.Multiple>
-    : AllAnswers<QuestionTypes.Boolean>;
+      ? AllAnswers<QuestionTypes.Multiple>
+      : AllAnswers<QuestionTypes.Boolean>;
 
   /**
    * Compares the given string to this question's correct answer.

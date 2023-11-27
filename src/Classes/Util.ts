@@ -1,6 +1,5 @@
 import type { ErrorResponse } from "../Typings/interfaces";
 import type { ErrorCode, ExtendedDictionary } from "../Typings/types";
-import fetch from "node-fetch";
 
 /**
  * @class Class for utility functions.
@@ -44,12 +43,12 @@ export default class Util {
         typeof value == "number"
         ? value
         : typeof value == "string"
-        ? Util.base64Decoder.decodeString(value)
-        : typeof value == "object" && !Array.isArray(value)
-        ? Util.base64Decoder.decodeObjectValues(value as object)
-        : Array.isArray(value)
-        ? Util.base64Decoder.decodeStringArray(value)
-        : value;
+          ? Util.base64Decoder.decodeString(value)
+          : typeof value == "object" && !Array.isArray(value)
+            ? Util.base64Decoder.decodeObjectValues(value as object)
+            : Array.isArray(value)
+              ? Util.base64Decoder.decodeStringArray(value)
+              : value;
     },
 
     /**

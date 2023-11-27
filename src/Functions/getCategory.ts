@@ -18,12 +18,14 @@ import type { CategoryResolvable } from "../Typings/types";
 export default async function getCategory(
   arg: CategoryResolvable
 ): Promise<CategoryData> {
-  let resolvable: CategoryResolvable | null = arg;
+  let resolvable: CategoryResolvable | null = null;
   if (typeof arg === "string") {
     resolvable = Category.idByName(arg);
+  } else if (Number.isInteger(arg) && arg >= 9 && arg <= 32) {
+    resolvable = arg;
   }
 
-  if (resolvable === null || arg < 9 || arg > 32)
+  if (resolvable === null)
     throw new TypeError(
       `Argument (${arg}) does not resolve into a valid OpenTDB category`
     );

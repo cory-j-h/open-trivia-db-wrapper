@@ -38,9 +38,11 @@ export default class Session {
    */
   async start() {
     try {
-      const request = await Util.fetch<RawSessionStartResponse>(
-        Routes.SessionStart
-      );
+      const url = Util.createQueriedLink(Routes.Session, {
+        command: "request",
+      });
+
+      const request = await Util.fetch<RawSessionStartResponse>(url);
       this.token = request.token;
       return this.token;
     } catch (err) {
@@ -55,7 +57,7 @@ export default class Session {
     try {
       if (this.token === null) return;
 
-      const url = Util.createQueriedLink(Routes.SessionReset, {
+      const url = Util.createQueriedLink(Routes.Session, {
         command: "reset",
         token: this.token,
       });
